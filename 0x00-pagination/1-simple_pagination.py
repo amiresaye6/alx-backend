@@ -14,7 +14,6 @@ be returned.
 """
 
 import csv
-import math
 from typing import List
 from typing import Tuple
 

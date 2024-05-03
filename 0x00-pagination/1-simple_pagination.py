@@ -72,6 +72,9 @@ class Server:
         assert page > 0 and page_size > 0, "must be greater than 0"
         data = self.dataset()
         # print(self.__dataset[1:5])
-        start_index, end_index = index_range(page, page_size)
-        # print(start_index, end_index)
-        return data[start_index: end_index]
+        try:
+            start_index, end_index = index_range(page, page_size)
+            # print(start_index, end_index)
+            return data[start_index: end_index]
+        except Exception:
+            return []

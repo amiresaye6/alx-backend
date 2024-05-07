@@ -50,7 +50,8 @@ class LIFOCache(BaseCaching):
             else:
                 self.__cache_array.append(key)
             if len(self.__cache_array) > self.MAX_ITEMS:
-                print("DISCARD: {}".format(self.__cache_array[self.MAX_ITEMS - 1]))
+                print("DISCARD: {}".format(
+                    self.__cache_array[self.MAX_ITEMS - 1]))
                 del(self.cache_data[self.__cache_array.pop(-2)])
             self.cache_data[key] = item
 

@@ -25,7 +25,7 @@ from base_caching import BaseCaching
 
 class LRUCache(BaseCaching):
     """
-    caching system class using least recently  userd
+    caching system class using least recently used algorithm
     """
 
     def __init__(self):

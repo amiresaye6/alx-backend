@@ -25,7 +25,7 @@ from base_caching import BaseCaching
 
 class MRUCache(BaseCaching):
     """
-    caching system class using last in first out algorithm
+    caching system class using most recently used algorithm
     """
 
     def __init__(self):
@@ -37,7 +37,7 @@ class MRUCache(BaseCaching):
 
     def put(self, key, item):
         """
-        setter for the cache_data using lifo algorithm
+        setter for the cache_data using mfu algorithm
         """
         if key is not None and item is not None:
             if key in self.__cache_array:

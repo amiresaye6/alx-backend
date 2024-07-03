@@ -17,28 +17,29 @@ Use Config to set Babel’s default locale ("en") and timezone ("UTC").
 
 Use that class as config for your Flask app.
 """
-from flask import Flask, render_template
 from flask_babel import Babel
-
-app = Flask(__name__)
-babel = Babel(app, locale_selector="en")
+from flask import Flask, render_template
 
 
-class Config():
-    """
-    used to set Babel’s default locale ("en") and timezone ("UTC").
-    used as config for your Flask app.
+class Config:
+    """Represents a Flask Babel configuration.
     """
     LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
+
+app = Flask(__name__)
+app.config.from_object(Config)
+app.url_map.strict_slashes = False
+babel = Babel(app)
 
 
 @app.route('/')
-def main_page():
+def get_index() -> str:
+    """The home/index page.
     """
-    route for an index.html template that simply outputs “Welcome to Holberton”
-    as page title (<title>) and “Hello world” as header (<h1>).
-    """
-    return render_template("0-index.html")
+    return render_template('1-index.html')
 
 
 if __name__ == "__main__":

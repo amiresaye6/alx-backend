@@ -7,35 +7,39 @@ Create a get_locale function with the babel.localeselector decorator. Use
 request.accept_languages to determine the best match with our
 supported languages.
 """
-from flask import Flask, request, render_template
 from flask_babel import Babel
-
-app = Flask(__name__)
-babel = Babel(app, locale_selector="en")
+from flask import Flask, render_template, request
 
 
-class Config():
-    """
-    used to set Babel’s default locale ("en") and timezone ("UTC").
-    used as config for your Flask app.
+class Config:
+    """Represents a Flask Babel configuration.
     """
     LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
+
+
+app = Flask(__name__)
+app.config.from_object(Config)
+app.url_map.strict_slashes = False
+babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """
-    determine the best match with our supported languages.
+    etermine the best match with our supported languages
     """
+
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
-def main_page():
+def get_index() -> str:
+    """The home/index page.
     """
-    route for an index.html template that simply outputs “Welcome to Holberton”
-    as page title (<title>) and “Hello world” as header (<h1>).
-    """
-    return render_template("0-index.html")
+    return render_template('2-index.html')
 
 
 if __name__ == "__main__":

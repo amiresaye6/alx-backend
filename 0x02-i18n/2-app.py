@@ -19,7 +19,6 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-
 app = Flask(__name__)
 app.config.from_object(Config)
 app.url_map.strict_slashes = False
